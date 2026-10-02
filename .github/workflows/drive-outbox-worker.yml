@@ -1,0 +1,153 @@
+name: Foundry Drive Outbox Worker
+
+on:
+  workflow_call:
+
+permissions:
+  contents: write
+  id-token: write
+
+jobs:
+  process:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      SHEET_CSV_URL: https://docs.google.com/spreadsheets/d/1bjQpmqBMjMdgy8GeurwARHod9hPU6P7huUkdwV7qmXc/export?format=csv&gid=500256265
+      GATEWAY_URL: https://bnkiiopmlddphvujakyb.supabase.co/functions/v1/foundry-operator-gateway
+      OIDC_AUDIENCE: foundry-control-plane
+      STATE_FILE: bridge-results/state.json
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Fetch public outbox
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p bridge-results
+          curl -fsSL "$SHEET_CSV_URL" -o /tmp/outbox.csv
+          test -s /tmp/outbox.csv
+
+      - name: Obtain GitHub OIDC token
+        shell: bash
+        run: |
+          set -euo pipefail
+          oidc_url="${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=${OIDC_AUDIENCE}"
+          curl -fsS             -H "Authorization: bearer ${ACTIONS_ID_TOKEN_REQUEST_TOKEN}"             "$oidc_url"             -o /tmp/oidc.json
+          jq -er '.value' /tmp/oidc.json > /tmp/oidc.token
+          chmod 600 /tmp/oidc.token
+
+      - name: Process bounded pending commands
+        shell: python
+        env:
+          OUTBOX_PATH: /tmp/outbox.csv
+          OIDC_TOKEN_PATH: /tmp/oidc.token
+        run: |
+          import csv, json, os, pathlib, urllib.request, urllib.error
+          from datetime import datetime, timezone
+
+          state_path = pathlib.Path(os.environ["STATE_FILE"])
+          if state_path.exists():
+              state = json.loads(state_path.read_text())
+          else:
+              state = {"version": 1, "requests": {}}
+
+          rows = []
+          with open(os.environ["OUTBOX_PATH"], newline="", encoding="utf-8-sig") as f:
+              rows = list(csv.DictReader(f))
+
+          token = pathlib.Path(os.environ["OIDC_TOKEN_PATH"]).read_text().strip()
+          processed = 0
+
+          for row in rows:
+              if processed >= 5:
+                  break
+
+              request_id = (row.get("request_id") or "").strip()
+              operation = (row.get("operation") or "").strip()
+              input_json = (row.get("input_json") or "{}").strip()
+              status = (row.get("status") or "").strip().upper()
+
+              if status not in {"PENDING", "RETRY"}:
+                  continue
+              if not request_id or not operation:
+                  continue
+
+              prior = state["requests"].get(request_id)
+              if prior and prior.get("terminal") is True:
+                  continue
+
+              try:
+                  input_obj = json.loads(input_json)
+                  if not isinstance(input_obj, dict):
+                      raise ValueError("input_json must be an object")
+              except Exception as e:
+                  state["requests"][request_id] = {
+                      "operation": operation,
+                      "terminal": True,
+                      "http_status": 400,
+                      "processed_at": datetime.now(timezone.utc).isoformat(),
+                      "error": "LOCAL_INVALID_INPUT_JSON",
+                  }
+                  processed += 1
+                  continue
+
+              payload = json.dumps({
+                  "request_id": request_id,
+                  "operation": operation,
+                  "input": input_obj,
+              }).encode()
+
+              req = urllib.request.Request(
+                  os.environ["GATEWAY_URL"],
+                  data=payload,
+                  method="POST",
+                  headers={
+                      "Authorization": f"Bearer {token}",
+                      "Content-Type": "application/json",
+                  },
+              )
+
+              code = 0
+              body = ""
+              try:
+                  with urllib.request.urlopen(req, timeout=20) as resp:
+                      code = resp.status
+                      body = resp.read().decode()
+              except urllib.error.HTTPError as e:
+                  code = e.code
+                  body = e.read().decode()
+              except Exception as e:
+                  body = json.dumps({"error": "FETCH_ERROR", "detail": str(e)})
+
+              try:
+                  parsed = json.loads(body)
+              except Exception:
+                  parsed = {"raw": body[:4000]}
+
+              terminal = 200 <= code < 500 and code != 429
+              state["requests"][request_id] = {
+                  "operation": operation,
+                  "terminal": terminal,
+                  "http_status": code,
+                  "processed_at": datetime.now(timezone.utc).isoformat(),
+                  "response": parsed,
+              }
+              processed += 1
+
+          state["updated_at"] = datetime.now(timezone.utc).isoformat()
+          state_path.write_text(json.dumps(state, indent=2, sort_keys=True) + "\n")
+
+      - name: Persist derived result ledger
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- "$STATE_FILE"; then
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$STATE_FILE"
+          git commit -m "Update Foundry Drive outbox results"
+          git push
