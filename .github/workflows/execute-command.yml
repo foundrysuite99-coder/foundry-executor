@@ -1,0 +1,74 @@
+name: Foundry Executor
+
+on:
+  workflow_call:
+    inputs:
+      issue_number:
+        description: "Command issue number in the caller repository"
+        required: true
+        type: number
+
+permissions:
+  contents: read
+  issues: write
+  id-token: write
+
+jobs:
+  execute:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      ISSUE_NUMBER: ${{ inputs.issue_number }}
+      GATEWAY_URL: https://bnkiiopmlddphvujakyb.supabase.co/functions/v1/foundry-operator-gateway
+      OIDC_AUDIENCE: foundry-control-plane
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Fetch and validate command
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$ISSUE_NUMBER" -ge 1
+          curl -fsS             -H "Authorization: Bearer $GH_TOKEN"             -H "Accept: application/vnd.github+json"             "https://api.github.com/repos/$GITHUB_REPOSITORY/issues/$ISSUE_NUMBER"             -o issue.json
+          jq -r '.body // ""' issue.json > command.json
+          test "$(wc -c < command.json)" -le 20000
+          jq -e '
+            type == "object" and
+            .version == 1 and
+            (.operation | type == "string") and
+            (.input | type == "object") and
+            (.request_id | type == "string") and
+            (.request_id | length >= 1 and length <= 120)
+          ' command.json >/dev/null
+
+      - name: Obtain GitHub OIDC token
+        shell: bash
+        run: |
+          set -euo pipefail
+          oidc_url="${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=${OIDC_AUDIENCE}"
+          curl -fsS             -H "Authorization: bearer ${ACTIONS_ID_TOKEN_REQUEST_TOKEN}"             "$oidc_url"             -o oidc.json
+          jq -er '.value' oidc.json > oidc.token
+          chmod 600 oidc.token
+
+      - name: Invoke Foundry gateway
+        id: invoke
+        shell: bash
+        run: |
+          set -euo pipefail
+          token="$(cat oidc.token)"
+          code="$(curl -sS -o gateway.json -w "%{http_code}"             -X POST "$GATEWAY_URL"             -H "Authorization: Bearer $token"             -H "Content-Type: application/json"             --data-binary @command.json)"
+          echo "status=$code" >> "$GITHUB_OUTPUT"
+          test "$code" -ge 200
+          test "$code" -lt 300
+
+      - name: Publish result
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -f gateway.json ]; then
+            jq -Rs '{body: ("Foundry executor result\n\n```json\n" + . + "\n```")}' gateway.json > comment.json
+          else
+            printf '%s' '{"body":"Foundry executor failed before a gateway response was produced."}' > comment.json
+          fi
+          curl -fsS             -X POST             -H "Authorization: Bearer $GH_TOKEN"             -H "Accept: application/vnd.github+json"             -H "Content-Type: application/json"             --data-binary @comment.json             "https://api.github.com/repos/$GITHUB_REPOSITORY/issues/$ISSUE_NUMBER/comments"             >/dev/null
+          curl -fsS             -X PATCH             -H "Authorization: Bearer $GH_TOKEN"             -H "Accept: application/vnd.github+json"             -H "Content-Type: application/json"             --data '{"state":"closed"}'             "https://api.github.com/repos/$GITHUB_REPOSITORY/issues/$ISSUE_NUMBER"             >/dev/null
