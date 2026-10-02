@@ -132,6 +132,9 @@ jobs:
               }
               processed += 1
 
+          if processed == 0:
+              raise SystemExit(0)
+
           state["updated_at"] = datetime.now(timezone.utc).isoformat()
           state_path.write_text(json.dumps(state, indent=2, sort_keys=True) + "\n")
 
