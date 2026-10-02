@@ -126,7 +126,7 @@ jobs:
               except Exception:
                   parsed = {"raw": body[:4000]}
 
-              terminal = 200 <= code < 500 and code != 429
+              terminal = (200 <= code < 300) or code in {400, 404, 409, 422}
               state["requests"][request_id] = {
                   "operation": operation,
                   "terminal": terminal,
