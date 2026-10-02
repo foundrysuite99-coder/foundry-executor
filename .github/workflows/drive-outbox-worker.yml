@@ -67,10 +67,6 @@ jobs:
               request_id = (row.get("request_id") or "").strip()
               operation = (row.get("operation") or "").strip()
               input_json = (row.get("input_json") or "{}").strip()
-              status = (row.get("status") or "").strip().upper()
-
-              if status not in {"PENDING", "RETRY"}:
-                  continue
               if not request_id or not operation:
                   continue
 
@@ -143,7 +139,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          if git diff --quiet -- "$STATE_FILE"; then
+          if git diff --quiet -- "$STATE_FILE" && git ls-files --error-unmatch "$STATE_FILE" >/dev/null 2>&1; then
             exit 0
           fi
           git config user.name "github-actions[bot]"
