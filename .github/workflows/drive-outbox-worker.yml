@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     env:
-      SHEET_CSV_URL: https://docs.google.com/spreadsheets/d/1bjQpmqBMjMdgy8GeurwARHod9hPU6P7huUkdwV7qmXc/export?format=csv&gid=500256265
+      SHEET_CSV_URL: https://docs.google.com/spreadsheets/d/1UKkDIbm3GLhMDiEbESMc-zzzUhckFKt3u0ZXvX-GiXk/export?format=csv&gid=1207987105
       GATEWAY_URL: https://bnkiiopmlddphvujakyb.supabase.co/functions/v1/foundry-operator-gateway
       OIDC_AUDIENCE: foundry-control-plane
       STATE_FILE: bridge-results/state.json
