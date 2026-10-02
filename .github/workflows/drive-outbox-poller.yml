@@ -2,9 +2,6 @@ name: Foundry Drive Outbox Poller
 
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - "bridge-trigger/**"
   schedule:
     - cron: "*/15 * * * *"
 
