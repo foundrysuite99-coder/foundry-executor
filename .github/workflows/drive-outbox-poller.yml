@@ -1,0 +1,16 @@
+name: Foundry Drive Outbox Poller
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  id-token: write
+
+concurrency:
+  group: foundry-drive-outbox
+  cancel-in-progress: false
+
+jobs:
+  poll:
+    uses: foundrysuite99-coder/foundry-executor/.github/workflows/drive-outbox-worker.yml@c02af6396d2c24fbe14b9dcb7cf639aff0c7fd01
