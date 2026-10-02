@@ -3,7 +3,7 @@ name: Foundry Drive Outbox Poller
 on:
   workflow_dispatch:
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "*/15 * * * *"
 
 permissions:
   contents: write
