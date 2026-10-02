@@ -4,9 +4,19 @@ on:
   workflow_call:
     inputs:
       issue_number:
-        description: "Command issue number in the caller repository"
+        description: "Issue or pull request number in the caller repository"
         required: true
         type: number
+      command_json:
+        description: "Optional command payload. May be prefixed with FOUNDRY_COMMAND_V1."
+        required: false
+        type: string
+        default: ""
+      close_issue:
+        description: "Close the source issue after publishing the result"
+        required: false
+        type: boolean
+        default: true
 
 permissions:
   contents: read
@@ -19,17 +29,29 @@ jobs:
     timeout-minutes: 5
     env:
       ISSUE_NUMBER: ${{ inputs.issue_number }}
+      COMMAND_JSON: ${{ inputs.command_json }}
       GATEWAY_URL: https://bnkiiopmlddphvujakyb.supabase.co/functions/v1/foundry-operator-gateway
       OIDC_AUDIENCE: foundry-control-plane
       GH_TOKEN: ${{ github.token }}
     steps:
-      - name: Fetch and validate command
+      - name: Prepare and validate command
         shell: bash
         run: |
           set -euo pipefail
           test "$ISSUE_NUMBER" -ge 1
-          curl -fsS             -H "Authorization: Bearer $GH_TOKEN"             -H "Accept: application/vnd.github+json"             "https://api.github.com/repos/$GITHUB_REPOSITORY/issues/$ISSUE_NUMBER"             -o issue.json
-          jq -r '.body // ""' issue.json > command.json
+
+          if [ -n "$COMMAND_JSON" ]; then
+            printf '%s' "$COMMAND_JSON" > raw-command.txt
+            if head -n 1 raw-command.txt | grep -qx 'FOUNDRY_COMMAND_V1'; then
+              tail -n +2 raw-command.txt > command.json
+            else
+              cp raw-command.txt command.json
+            fi
+          else
+            curl -fsS               -H "Authorization: Bearer $GH_TOKEN"               -H "Accept: application/vnd.github+json"               "https://api.github.com/repos/$GITHUB_REPOSITORY/issues/$ISSUE_NUMBER"               -o issue.json
+            jq -r '.body // ""' issue.json > command.json
+          fi
+
           test "$(wc -c < command.json)" -le 20000
           jq -e '
             type == "object" and
@@ -50,13 +72,11 @@ jobs:
           chmod 600 oidc.token
 
       - name: Invoke Foundry gateway
-        id: invoke
         shell: bash
         run: |
           set -euo pipefail
           token="$(cat oidc.token)"
           code="$(curl -sS -o gateway.json -w "%{http_code}"             -X POST "$GATEWAY_URL"             -H "Authorization: Bearer $token"             -H "Content-Type: application/json"             --data-binary @command.json)"
-          echo "status=$code" >> "$GITHUB_OUTPUT"
           test "$code" -ge 200
           test "$code" -lt 300
 
@@ -71,4 +91,10 @@ jobs:
             printf '%s' '{"body":"Foundry executor failed before a gateway response was produced."}' > comment.json
           fi
           curl -fsS             -X POST             -H "Authorization: Bearer $GH_TOKEN"             -H "Accept: application/vnd.github+json"             -H "Content-Type: application/json"             --data-binary @comment.json             "https://api.github.com/repos/$GITHUB_REPOSITORY/issues/$ISSUE_NUMBER/comments"             >/dev/null
+
+      - name: Close source issue
+        if: ${{ always() && inputs.close_issue }}
+        shell: bash
+        run: |
+          set -euo pipefail
           curl -fsS             -X PATCH             -H "Authorization: Bearer $GH_TOKEN"             -H "Accept: application/vnd.github+json"             -H "Content-Type: application/json"             --data '{"state":"closed"}'             "https://api.github.com/repos/$GITHUB_REPOSITORY/issues/$ISSUE_NUMBER"             >/dev/null
