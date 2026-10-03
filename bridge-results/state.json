@@ -641,6 +641,15 @@
       },
       "terminal": true
     },
+    "foundry-builder-20261003T1232Z-begin": {
+      "http_status": 401,
+      "operation": "begin_work",
+      "processed_at": "2026-10-03T14:38:19.519280+00:00",
+      "response": {
+        "error": "AUTH_OR_REQUEST_REJECTED"
+      },
+      "terminal": false
+    },
     "foundry-cutover-test-20261002T1846Z": {
       "http_status": 200,
       "operation": "get_wake_bundle",
@@ -1230,6 +1239,15 @@
       },
       "terminal": true
     },
+    "foundry-mentor-20261003T1205Z-artifact-permit": {
+      "http_status": 401,
+      "operation": "issue_artifact_permit",
+      "processed_at": "2026-10-03T14:38:18.942335+00:00",
+      "response": {
+        "error": "AUTH_OR_REQUEST_REJECTED"
+      },
+      "terminal": false
+    },
     "foundry-supervisor-20261002T2355Z-begin": {
       "http_status": 200,
       "operation": "begin_work",
@@ -1679,6 +1697,15 @@
       },
       "terminal": true
     },
+    "foundry-supervisor-20261003T1155Z-begin": {
+      "http_status": 401,
+      "operation": "begin_work",
+      "processed_at": "2026-10-03T14:38:18.343150+00:00",
+      "response": {
+        "error": "AUTH_OR_REQUEST_REJECTED"
+      },
+      "terminal": false
+    },
     "g2-public-outbox-scheduled-01": {
       "http_status": 200,
       "operation": "get_wake_bundle",
@@ -1740,6 +1767,6 @@
       "terminal": true
     }
   },
-  "updated_at": "2026-10-03T11:10:48.979415+00:00",
+  "updated_at": "2026-10-03T14:38:19.519295+00:00",
   "version": 1
 }
