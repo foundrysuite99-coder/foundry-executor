@@ -15,4 +15,4 @@ concurrency:
 
 jobs:
   poll:
-    uses: foundrysuite99-coder/foundry-executor/.github/workflows/drive-outbox-worker.yml@cd6284a87d376f290318dfac1cad4cbe2a410fdc
+    uses: foundrysuite99-coder/foundry-executor/.github/workflows/drive-outbox-worker.yml@e5e282d5eb71d07f57e8d2d8f6ddceb996cde16a
