@@ -1198,6 +1198,38 @@
       },
       "terminal": true
     },
+    "foundry-mentor-20261003T1105Z-artifact-permit": {
+      "http_status": 200,
+      "operation": "issue_artifact_permit",
+      "processed_at": "2026-10-03T11:10:48.979393+00:00",
+      "response": {
+        "auth": {
+          "actor": "foundrysuite99-coder",
+          "audience": "foundry-control-plane",
+          "event_name": "schedule",
+          "job_workflow_ref": "foundrysuite99-coder/foundry-executor/.github/workflows/drive-outbox-worker.yml@cd6284a87d376f290318dfac1cad4cbe2a410fdc",
+          "provider": "github",
+          "ref": "refs/heads/main",
+          "repository": "foundrysuite99-coder/foundry-executor"
+        },
+        "dispatch": {
+          "operation": "issue_artifact_permit",
+          "replayed": false,
+          "request_id": "foundry-mentor-20261003T1105Z-artifact-permit",
+          "result": {
+            "destination": "OUTPUTS",
+            "destination_folder_id": "1vH0rbf_xk2uJqSwFRcZ3Bzc7pqcdpxQ3",
+            "expires_at": "2026-10-03T11:25:48.885239+00:00",
+            "file_id": "1o8t6mwCZl-zXRv7UXmNf9ck98TQoGDdo0ajQQjNTqe4",
+            "permit_id": "de418504-c3ca-4497-842e-aee4a92c47c9"
+          }
+        },
+        "ok": true,
+        "operation": "issue_artifact_permit",
+        "request_id": "foundry-mentor-20261003T1105Z-artifact-permit"
+      },
+      "terminal": true
+    },
     "foundry-supervisor-20261002T2355Z-begin": {
       "http_status": 200,
       "operation": "begin_work",
@@ -1708,6 +1740,6 @@
       "terminal": true
     }
   },
-  "updated_at": "2026-10-03T10:38:59.792293+00:00",
+  "updated_at": "2026-10-03T11:10:48.979415+00:00",
   "version": 1
 }
