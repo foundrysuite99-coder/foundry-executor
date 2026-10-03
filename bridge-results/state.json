@@ -1385,6 +1385,18 @@
       },
       "terminal": true
     },
+    "foundry-supervisor-20261003T0855Z-artifact-permit": {
+      "http_status": 409,
+      "operation": "issue_artifact_permit",
+      "processed_at": "2026-10-03T08:56:25.540269+00:00",
+      "response": {
+        "code": "P0001",
+        "error": "OPERATION_REJECTED",
+        "operation": "issue_artifact_permit",
+        "request_id": "foundry-supervisor-20261003T0855Z-artifact-permit"
+      },
+      "terminal": true
+    },
     "g2-public-outbox-scheduled-01": {
       "http_status": 200,
       "operation": "get_wake_bundle",
@@ -1446,6 +1458,6 @@
       "terminal": true
     }
   },
-  "updated_at": "2026-10-03T07:58:24.434733+00:00",
+  "updated_at": "2026-10-03T08:56:25.540291+00:00",
   "version": 1
 }
