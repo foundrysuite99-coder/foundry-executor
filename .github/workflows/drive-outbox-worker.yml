@@ -149,4 +149,23 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add "$STATE_FILE"
           git commit -m "Update Foundry Drive outbox results"
-          git push
+
+          # main can advance while another worker persists its ledger result.
+          # Rebase this ledger-only commit onto the latest remote tip and retry
+          # a bounded number of times; never force-push or overwrite conflicts.
+          for attempt in 1 2 3; do
+            git fetch origin main
+            if ! git rebase origin/main; then
+              git rebase --abort || true
+              echo "Ledger rebase conflict; refusing to overwrite concurrent state."
+              exit 1
+            fi
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            echo "Concurrent main advance during ledger push (attempt $attempt); retrying."
+            sleep $((attempt * 2))
+          done
+
+          echo "Unable to persist result ledger after bounded retries."
+          exit 1
