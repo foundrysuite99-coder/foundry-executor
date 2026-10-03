@@ -642,13 +642,79 @@
       "terminal": true
     },
     "foundry-builder-20261003T1232Z-begin": {
-      "http_status": 401,
+      "http_status": 200,
       "operation": "begin_work",
-      "processed_at": "2026-10-03T14:38:19.519280+00:00",
+      "processed_at": "2026-10-03T18:38:59.973054+00:00",
       "response": {
-        "error": "AUTH_OR_REQUEST_REJECTED"
+        "auth": {
+          "actor": "foundrysuite99-coder",
+          "audience": "foundry-control-plane",
+          "event_name": "schedule",
+          "job_workflow_ref": "foundrysuite99-coder/foundry-executor/.github/workflows/drive-outbox-worker.yml@e5e282d5eb71d07f57e8d2d8f6ddceb996cde16a",
+          "provider": "github",
+          "ref": "refs/heads/main",
+          "repository": "foundrysuite99-coder/foundry-executor"
+        },
+        "dispatch": {
+          "operation": "begin_work",
+          "replayed": true,
+          "request_id": "foundry-builder-20261003T1232Z-begin",
+          "result": {
+            "agent_slug": "builder-operator",
+            "claimed": true,
+            "lease_expires_at": "2026-10-03T15:06:32.581394+00:00",
+            "lease_generation": 7,
+            "run_id": "ea4c22d8-88f5-4d83-b033-69aff557d37a",
+            "task": {
+              "authority_ceiling": 0,
+              "checkpoint": {
+                "document_id": "1crHxStnp1Sq5E8vVRKCq0OgCVzReS1WqDWPwLcqopJs",
+                "document_verified": true,
+                "gates_reviewed": [
+                  "G0",
+                  "G1",
+                  "G2",
+                  "G3",
+                  "G4",
+                  "G18"
+                ],
+                "material_findings_count": 3,
+                "note": "Audit document verified by readback. Placement under authorized Foundry output folder remains blocked by connector safety policy; no bypass attempted.",
+                "status": "BOUNDED_AUDIT_COMPLETE"
+              },
+              "eligible_agent_slug": "builder-operator",
+              "origin_agent_slug": null,
+              "resource_scope": "foundry:p0:audit",
+              "task_class": "RESEARCH",
+              "task_id": "66929cdb-a86f-4317-b356-3fa471946e86",
+              "task_spec": {
+                "allowed_tools": [
+                  "web-public",
+                  "google-drive-foundry"
+                ],
+                "completion": "Return only non-sensitive metadata: document title, document id/url, gates reviewed, material findings count, and recommended next bounded task.",
+                "forbidden": [
+                  "direct-github-plugin",
+                  "direct-supabase-plugin",
+                  "production",
+                  "spend",
+                  "credentials",
+                  "dns"
+                ],
+                "objective": "Audit the current Foundry P0/P1 implementation against the final design and gate evidence. Identify only still-open gates, missing proof, contradictions, and the smallest safe next actions.",
+                "output": "Create a Google Doc in the Foundry account titled FOUNDRY P0 REMAINING GATES AUDIT \u2014 2026-10-02. Keep it concise, evidence-oriented, and include OPEN/PASS/BLOCKED with rationale."
+              },
+              "title": "P0 remaining-gates audit",
+              "version": 9
+            },
+            "task_id": "66929cdb-a86f-4317-b356-3fa471946e86"
+          }
+        },
+        "ok": true,
+        "operation": "begin_work",
+        "request_id": "foundry-builder-20261003T1232Z-begin"
       },
-      "terminal": false
+      "terminal": true
     },
     "foundry-cutover-test-20261002T1846Z": {
       "http_status": 200,
@@ -1240,13 +1306,16 @@
       "terminal": true
     },
     "foundry-mentor-20261003T1205Z-artifact-permit": {
-      "http_status": 401,
+      "http_status": 409,
       "operation": "issue_artifact_permit",
-      "processed_at": "2026-10-03T14:38:18.942335+00:00",
+      "processed_at": "2026-10-03T18:38:59.279346+00:00",
       "response": {
-        "error": "AUTH_OR_REQUEST_REJECTED"
+        "code": "P0001",
+        "error": "OPERATION_REJECTED",
+        "operation": "issue_artifact_permit",
+        "request_id": "foundry-mentor-20261003T1205Z-artifact-permit"
       },
-      "terminal": false
+      "terminal": true
     },
     "foundry-supervisor-20261002T2355Z-begin": {
       "http_status": 200,
@@ -1698,13 +1767,52 @@
       "terminal": true
     },
     "foundry-supervisor-20261003T1155Z-begin": {
-      "http_status": 401,
+      "http_status": 200,
       "operation": "begin_work",
-      "processed_at": "2026-10-03T14:38:18.343150+00:00",
+      "processed_at": "2026-10-03T18:38:58.140903+00:00",
       "response": {
-        "error": "AUTH_OR_REQUEST_REJECTED"
+        "auth": {
+          "actor": "foundrysuite99-coder",
+          "audience": "foundry-control-plane",
+          "event_name": "schedule",
+          "job_workflow_ref": "foundrysuite99-coder/foundry-executor/.github/workflows/drive-outbox-worker.yml@e5e282d5eb71d07f57e8d2d8f6ddceb996cde16a",
+          "provider": "github",
+          "ref": "refs/heads/main",
+          "repository": "foundrysuite99-coder/foundry-executor"
+        },
+        "dispatch": {
+          "operation": "begin_work",
+          "replayed": true,
+          "request_id": "foundry-supervisor-20261003T1155Z-begin",
+          "result": {
+            "agent_slug": "direction-supervisor",
+            "claimed": true,
+            "lease_expires_at": "2026-10-03T15:06:30.048627+00:00",
+            "lease_generation": 3,
+            "run_id": "e6dba1fe-f21e-4aaa-aa9e-a7e93d8526b9",
+            "task": {
+              "authority_ceiling": 1,
+              "checkpoint": {},
+              "eligible_agent_slug": "direction-supervisor",
+              "origin_agent_slug": "direction-supervisor",
+              "resource_scope": "foundry:supervisor:artifact-e2e",
+              "task_class": "MAINTENANCE",
+              "task_id": "5b81f687-fc7d-453e-9d3e-812f5437765f",
+              "task_spec": {
+                "kind": "supervisor_operation",
+                "objective": "Complete a legitimate positive artifact-permit end-to-end test and canonical OUTPUTS/EVIDENCE placement using current authorized work. Preserve Foundry-only scope and lease fencing; do not broaden Drive authority."
+              },
+              "title": "Close artifact permit and canonical placement E2E",
+              "version": 4
+            },
+            "task_id": "5b81f687-fc7d-453e-9d3e-812f5437765f"
+          }
+        },
+        "ok": true,
+        "operation": "begin_work",
+        "request_id": "foundry-supervisor-20261003T1155Z-begin"
       },
-      "terminal": false
+      "terminal": true
     },
     "g2-public-outbox-scheduled-01": {
       "http_status": 200,
@@ -1767,6 +1875,6 @@
       "terminal": true
     }
   },
-  "updated_at": "2026-10-03T14:38:19.519295+00:00",
+  "updated_at": "2026-10-03T18:38:59.973072+00:00",
   "version": 1
 }
