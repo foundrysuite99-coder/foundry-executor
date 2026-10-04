@@ -898,6 +898,24 @@
       },
       "terminal": true
     },
+    "foundry-builder-20261004T0735Z-begin": {
+      "http_status": 401,
+      "operation": "begin_work",
+      "processed_at": "2026-10-04T09:05:08.593056+00:00",
+      "response": {
+        "error": "AUTH_OR_REQUEST_REJECTED"
+      },
+      "terminal": false
+    },
+    "foundry-builder-20261004T0857Z-cutover-begin": {
+      "http_status": 401,
+      "operation": "begin_work",
+      "processed_at": "2026-10-04T09:05:09.827775+00:00",
+      "response": {
+        "error": "AUTH_OR_REQUEST_REJECTED"
+      },
+      "terminal": false
+    },
     "foundry-cutover-test-20261002T1846Z": {
       "http_status": 200,
       "operation": "get_wake_bundle",
@@ -966,6 +984,15 @@
         "request_id": "foundry-cutover-test-20261002T1846Z"
       },
       "terminal": true
+    },
+    "foundry-direction-20261004T0830Z-drive-account-cutover-probe": {
+      "http_status": 401,
+      "operation": "get_wake_bundle",
+      "processed_at": "2026-10-04T09:05:09.204544+00:00",
+      "response": {
+        "error": "AUTH_OR_REQUEST_REJECTED"
+      },
+      "terminal": false
     },
     "foundry-mentor-20261002T1905Z-begin": {
       "http_status": 200,
@@ -1672,6 +1699,15 @@
       },
       "terminal": true
     },
+    "foundry-mentor-20261004T0705Z-artifact-permit": {
+      "http_status": 401,
+      "operation": "issue_artifact_permit",
+      "processed_at": "2026-10-04T09:05:08.057884+00:00",
+      "response": {
+        "error": "AUTH_OR_REQUEST_REJECTED"
+      },
+      "terminal": false
+    },
     "foundry-supervisor-20261002T2355Z-begin": {
       "http_status": 200,
       "operation": "begin_work",
@@ -2217,6 +2253,15 @@
       },
       "terminal": true
     },
+    "foundry-supervisor-20261004T0955Z-begin": {
+      "http_status": 401,
+      "operation": "begin_work",
+      "processed_at": "2026-10-04T09:05:10.397703+00:00",
+      "response": {
+        "error": "AUTH_OR_REQUEST_REJECTED"
+      },
+      "terminal": false
+    },
     "g2-public-outbox-scheduled-01": {
       "http_status": 200,
       "operation": "get_wake_bundle",
@@ -2278,6 +2323,6 @@
       "terminal": true
     }
   },
-  "updated_at": "2026-10-04T06:08:45.016540+00:00",
+  "updated_at": "2026-10-04T09:05:10.397721+00:00",
   "version": 1
 }
