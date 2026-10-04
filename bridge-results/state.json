@@ -1154,6 +1154,36 @@
       },
       "terminal": true
     },
+    "foundry-builder-20261004T2232Z-checkpoint": {
+      "http_status": 200,
+      "operation": "checkpoint_task",
+      "processed_at": "2026-10-04T22:35:17.166394+00:00",
+      "response": {
+        "auth": {
+          "actor": "foundrysuite99-coder",
+          "audience": "foundry-control-plane",
+          "event_name": "schedule",
+          "job_workflow_ref": "foundrysuite99-coder/foundry-executor/.github/workflows/drive-outbox-worker.yml@e5e282d5eb71d07f57e8d2d8f6ddceb996cde16a",
+          "provider": "github",
+          "ref": "refs/heads/main",
+          "repository": "foundrysuite99-coder/foundry-executor"
+        },
+        "dispatch": {
+          "operation": "checkpoint_task",
+          "replayed": false,
+          "request_id": "foundry-builder-20261004T2232Z-checkpoint",
+          "result": {
+            "lease_generation": 3,
+            "ok": true,
+            "task_id": "e3888795-54ac-4193-8216-deb8c331e7a2"
+          }
+        },
+        "ok": true,
+        "operation": "checkpoint_task",
+        "request_id": "foundry-builder-20261004T2232Z-checkpoint"
+      },
+      "terminal": true
+    },
     "foundry-cutover-test-20261002T1846Z": {
       "http_status": 200,
       "operation": "get_wake_bundle",
@@ -3157,6 +3187,6 @@
       "terminal": true
     }
   },
-  "updated_at": "2026-10-04T22:19:33.686976+00:00",
+  "updated_at": "2026-10-04T22:35:17.166421+00:00",
   "version": 1
 }
