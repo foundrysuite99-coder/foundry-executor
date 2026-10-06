@@ -5282,6 +5282,71 @@
       },
       "terminal": true
     },
+    "foundry-supervisor-20261006T0851Z-begin": {
+      "http_status": 200,
+      "operation": "begin_work",
+      "processed_at": "2026-10-06T09:03:55.936992+00:00",
+      "response": {
+        "auth": {
+          "actor": "foundrysuite99-coder",
+          "audience": "foundry-control-plane",
+          "event_name": "schedule",
+          "job_workflow_ref": "foundrysuite99-coder/foundry-executor/.github/workflows/drive-outbox-worker.yml@e5e282d5eb71d07f57e8d2d8f6ddceb996cde16a",
+          "provider": "github",
+          "ref": "refs/heads/main",
+          "repository": "foundrysuite99-coder/foundry-executor"
+        },
+        "dispatch": {
+          "operation": "begin_work",
+          "replayed": false,
+          "request_id": "foundry-supervisor-20261006T0851Z-begin",
+          "result": {
+            "agent_slug": "direction-supervisor",
+            "claimed": true,
+            "lease_expires_at": "2026-10-06T11:03:55.824863+00:00",
+            "lease_generation": 5,
+            "run_id": "edc2b72e-4944-4ac8-a4e7-f107b26adc76",
+            "task": {
+              "authority_ceiling": 0,
+              "checkpoint": {
+                "enforcement_next": "apply fields in task specs/evidence; observe next agent executions before schema expansion",
+                "marginal_cost_target_or_estimate": "required before production",
+                "monetization_adjacencies": "required for free-utility evaluation",
+                "portfolio_type": "standard field for strategy-derived work",
+                "status": "BOUNDED_POLICY_HOOKS_DEFINED",
+                "strategy_document_id": "12-0weSk2u2tmpv-v3rnVLJLO17J0KcTXv62bYvPAY4E"
+              },
+              "eligible_agent_slug": "direction-supervisor",
+              "origin_agent_slug": "direction-supervisor",
+              "resource_scope": "foundry:agent-task:c3479489-00c3-4d5e-a3b6-0073cdbc7db8",
+              "task_class": "MAINTENANCE",
+              "task_id": "c3479489-00c3-4d5e-a3b6-0073cdbc7db8",
+              "task_spec": {
+                "deliverable": "Verify Mentor/Builder received and act on the doctrine; define the minimum durable policy hooks needed for future tasks and drift detection; ensure portfolio_type, marginal_cost_target_or_estimate and monetization_adjacencies become standard task/evidence fields where useful; implement only bounded A0/A1 control-plane changes with readback.",
+                "guardrails": [
+                  "do not redesign the whole control plane without evidence",
+                  "do not create extra WAKEs",
+                  "preserve current authority boundaries",
+                  "prefer external/versioned agent policy over prompt bloat",
+                  "strategy drift becomes an operational issue once durable hooks exist"
+                ],
+                "objective": "Make Free Utility Foundry v1.0 self-perpetuating in operational selection and supervision without bloating WAKE prompts.",
+                "origin_agent_slug": "direction-supervisor",
+                "origin_run_id": "dc547c01-7528-4347-ad6e-32204b18bbe4",
+                "strategy_document_id": "12-0weSk2u2tmpv-v3rnVLJLO17J0KcTXv62bYvPAY4E"
+              },
+              "title": "Institutionalize Free Utility strategy in Foundry operations",
+              "version": 7
+            },
+            "task_id": "c3479489-00c3-4d5e-a3b6-0073cdbc7db8"
+          }
+        },
+        "ok": true,
+        "operation": "begin_work",
+        "request_id": "foundry-supervisor-20261006T0851Z-begin"
+      },
+      "terminal": true
+    },
     "g2-public-outbox-scheduled-01": {
       "http_status": 200,
       "operation": "get_wake_bundle",
@@ -5343,6 +5408,6 @@
       "terminal": true
     }
   },
-  "updated_at": "2026-10-06T08:08:09.427713+00:00",
+  "updated_at": "2026-10-06T09:03:55.937014+00:00",
   "version": 1
 }
