@@ -6293,6 +6293,36 @@
       },
       "terminal": true
     },
+    "foundry-supervisor-20261007T0558Z-caretaker-checkpoint": {
+      "http_status": 200,
+      "operation": "checkpoint_task",
+      "processed_at": "2026-10-07T06:01:05.145893+00:00",
+      "response": {
+        "auth": {
+          "actor": "foundrysuite99-coder",
+          "audience": "foundry-control-plane",
+          "event_name": "schedule",
+          "job_workflow_ref": "foundrysuite99-coder/foundry-executor/.github/workflows/drive-outbox-worker.yml@e5e282d5eb71d07f57e8d2d8f6ddceb996cde16a",
+          "provider": "github",
+          "ref": "refs/heads/main",
+          "repository": "foundrysuite99-coder/foundry-executor"
+        },
+        "dispatch": {
+          "operation": "checkpoint_task",
+          "replayed": false,
+          "request_id": "foundry-supervisor-20261007T0558Z-caretaker-checkpoint",
+          "result": {
+            "lease_generation": 7,
+            "ok": true,
+            "task_id": "0bdfa4a6-ead3-418c-83a6-a85ad664c143"
+          }
+        },
+        "ok": true,
+        "operation": "checkpoint_task",
+        "request_id": "foundry-supervisor-20261007T0558Z-caretaker-checkpoint"
+      },
+      "terminal": true
+    },
     "g2-public-outbox-scheduled-01": {
       "http_status": 200,
       "operation": "get_wake_bundle",
@@ -6354,6 +6384,6 @@
       "terminal": true
     }
   },
-  "updated_at": "2026-10-07T05:07:12.586138+00:00",
+  "updated_at": "2026-10-07T06:01:05.145956+00:00",
   "version": 1
 }
