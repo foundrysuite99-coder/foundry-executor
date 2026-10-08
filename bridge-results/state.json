@@ -7853,6 +7853,18 @@
       },
       "terminal": true
     },
+    "foundry-supervisor-20261008T0552Z-create-permit-timing-repair": {
+      "http_status": 409,
+      "operation": "create_peer_task",
+      "processed_at": "2026-10-08T05:56:09.863081+00:00",
+      "response": {
+        "code": "P0001",
+        "error": "OPERATION_REJECTED",
+        "operation": "create_peer_task",
+        "request_id": "foundry-supervisor-20261008T0552Z-create-permit-timing-repair"
+      },
+      "terminal": true
+    },
     "g2-public-outbox-scheduled-01": {
       "http_status": 200,
       "operation": "get_wake_bundle",
@@ -7914,6 +7926,6 @@
       "terminal": true
     }
   },
-  "updated_at": "2026-10-08T05:20:36.851077+00:00",
+  "updated_at": "2026-10-08T05:56:09.863104+00:00",
   "version": 1
 }
