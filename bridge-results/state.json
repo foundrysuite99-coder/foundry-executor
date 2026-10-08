@@ -9093,6 +9093,80 @@
       },
       "terminal": true
     },
+    "foundry-supervisor-20261008T1552Z-begin": {
+      "http_status": 200,
+      "operation": "begin_work",
+      "processed_at": "2026-10-08T16:03:56.550191+00:00",
+      "response": {
+        "auth": {
+          "actor": "foundrysuite99-coder",
+          "audience": "foundry-control-plane",
+          "event_name": "schedule",
+          "job_workflow_ref": "foundrysuite99-coder/foundry-executor/.github/workflows/drive-outbox-worker.yml@e5e282d5eb71d07f57e8d2d8f6ddceb996cde16a",
+          "provider": "github",
+          "ref": "refs/heads/main",
+          "repository": "foundrysuite99-coder/foundry-executor"
+        },
+        "dispatch": {
+          "operation": "begin_work",
+          "replayed": false,
+          "request_id": "foundry-supervisor-20261008T1552Z-begin",
+          "result": {
+            "agent_slug": "direction-supervisor",
+            "claimed": true,
+            "effective_lease_seconds": 21600,
+            "lease_expires_at": "2026-10-08T22:03:56.447775+00:00",
+            "lease_generation": 3,
+            "run_id": "c8fc3d36-9a4e-4b6a-9051-6b15799f8d21",
+            "task": {
+              "authority_ceiling": 0,
+              "checkpoint": {
+                "authority": "A0_A1_ONLY",
+                "builder_candidate_file_id": "1pntJf3YoXAyzlfXO9d7RqbSyob_KvcXniwBONacjtFY",
+                "builder_candidate_integrity": "STALE_P0_AUDIT_CONTENT_DO_NOT_CONSUME",
+                "cause_assessment": "Artifact authoring gate blocks narrow edit as well as earlier replacement; permit TTL cannot be validated with an invalid artifact",
+                "file_id": "1UwY8mA9MskNTuPtxRu-W2ZW8V6N2dSzdw2VbgtNSRrw",
+                "incident": "ARTIFACT_PERMIT_TTL_AND_FOUNDARY_DOCS_AUTHORING_BLOCK",
+                "next": "Release/finish after terminal checkpoint ACK; pursue explicitly authorized artifact authoring contract or safe approved provider-native creation; do not alter TTL, use invalid copy, or bypass connector safety. Maintain all three WAKEs enabled.",
+                "prior_checkpoint_ack": "foundry-supervisor-20261008T1152Z-permit-diagnostic-checkpoint",
+                "result": "BLOCKED_BY_CONNECTOR_SAFETY_NO_WRITE_NO_BYPASS",
+                "spend_eur": 0,
+                "status": "REPAIR_IN_PROGRESS_DOCS_CONTENT_WRITE_GATE_CONFIRMED",
+                "test": "Revision-fenced, non-destructive insertText disclaimer into Foundry-owned invalid EVIDENCE copy",
+                "verified_ledger": "Prior checkpoint terminal HTTP200; claim run and lease_generation1 valid until 2026-10-08T17:02:49Z"
+              },
+              "eligible_agent_slug": "direction-supervisor",
+              "origin_agent_slug": "direction-supervisor",
+              "resource_scope": "foundry:agent-task:3e81addb-3ad2-48f2-8a24-4b19c91475ba",
+              "task_class": "MAINTENANCE",
+              "task_id": "3e81addb-3ad2-48f2-8a24-4b19c91475ba",
+              "task_spec": {
+                "kind": "operational_incident",
+                "limits": [
+                  "A0_A1_ONLY",
+                  "NO_SPEND",
+                  "NO_PRODUCTION",
+                  "NO_SECURITY_EXPANSION"
+                ],
+                "objective": "Diagnose and safely repair artifact permit 15-minute TTL versus hourly wakes and observed transport latency. Verify exact current contract, propose smallest bounded reversible A0/A1 change within approved security envelope, preserve fencing, idempotency and evidence; do not expand TTL or authority without contract proof.",
+                "occurrence_id": "SUP-20261008-PERMIT-TIMING",
+                "origin_agent_slug": "direction-supervisor",
+                "origin_run_id": "9d697ec9-6e0f-4869-9637-ea084994d17e",
+                "resource_scope": "foundry:supervisor:artifact-permits",
+                "success": "Demonstrate a real permit and correct artifact can be bound/consumed with terminal ACK inside permitted expiry; verify by readback and durable ledger; otherwise checkpoint precise blocker."
+              },
+              "title": "Repair artifact permit timing",
+              "version": 6
+            },
+            "task_id": "3e81addb-3ad2-48f2-8a24-4b19c91475ba"
+          }
+        },
+        "ok": true,
+        "operation": "begin_work",
+        "request_id": "foundry-supervisor-20261008T1552Z-begin"
+      },
+      "terminal": true
+    },
     "g2-public-outbox-scheduled-01": {
       "http_status": 200,
       "operation": "get_wake_bundle",
@@ -9154,6 +9228,6 @@
       "terminal": true
     }
   },
-  "updated_at": "2026-10-08T15:25:51.863980+00:00",
+  "updated_at": "2026-10-08T16:03:56.550214+00:00",
   "version": 1
 }
