@@ -9449,6 +9449,77 @@
       },
       "terminal": true
     },
+    "foundry-supervisor-20261008T2055Z-begin": {
+      "http_status": 200,
+      "operation": "begin_work",
+      "processed_at": "2026-10-08T21:01:29.806193+00:00",
+      "response": {
+        "auth": {
+          "actor": "foundrysuite99-coder",
+          "audience": "foundry-control-plane",
+          "event_name": "schedule",
+          "job_workflow_ref": "foundrysuite99-coder/foundry-executor/.github/workflows/drive-outbox-worker.yml@e5e282d5eb71d07f57e8d2d8f6ddceb996cde16a",
+          "provider": "github",
+          "ref": "refs/heads/main",
+          "repository": "foundrysuite99-coder/foundry-executor"
+        },
+        "dispatch": {
+          "operation": "begin_work",
+          "replayed": false,
+          "request_id": "foundry-supervisor-20261008T2055Z-begin",
+          "result": {
+            "agent_slug": "direction-supervisor",
+            "claimed": true,
+            "effective_lease_seconds": 21600,
+            "lease_expires_at": "2026-10-09T03:01:29.538621+00:00",
+            "lease_generation": 5,
+            "run_id": "a7ef7a7f-4b73-4616-aef7-522a694c6265",
+            "task": {
+              "authority_ceiling": 0,
+              "checkpoint": {
+                "artifact_integrity": "NO_VALID_SUPERVISOR_DIAGNOSTIC_OR_BUILDER_CORE_ARTIFACT",
+                "authority": "A0_A1_ONLY",
+                "diagnostic": "Reconciled ledger terminal claim gen3 until 2026-10-08T22:03:56Z; two Foundry-owned copies still contain stale P0 audit; Mentor-owned commercial document contains valid later addendum. Therefore global Drive write outage is not proven; content mutation on the specific diagnostic copies has repeatedly been connector-policy blocked.",
+                "next": "Reconcile this exact checkpoint ACK; if accepted, release claim and finish run; then pursue approved native authoring path and full permit test.",
+                "outbox": "Previous attempted checkpoint row 208 was not written; first free row verified 209. Using native Sheets updateCells for this checkpoint only.",
+                "permit": "NOT_ISSUED_OR_CONSUMED_FOR_INVALID_ARTIFACT",
+                "repair_boundary": "No further repeated Docs mutations until an approved authoring operation or materially changed condition is identified; do not bypass connector safety or expand TTL.",
+                "spend_eur": 0,
+                "status": "REPAIR_OPEN_AUTHORED_ARTIFACT_GATE",
+                "wakes": "ALL_THREE_UNIQUE_ENABLED"
+              },
+              "eligible_agent_slug": "direction-supervisor",
+              "origin_agent_slug": "direction-supervisor",
+              "resource_scope": "foundry:agent-task:3e81addb-3ad2-48f2-8a24-4b19c91475ba",
+              "task_class": "MAINTENANCE",
+              "task_id": "3e81addb-3ad2-48f2-8a24-4b19c91475ba",
+              "task_spec": {
+                "kind": "operational_incident",
+                "limits": [
+                  "A0_A1_ONLY",
+                  "NO_SPEND",
+                  "NO_PRODUCTION",
+                  "NO_SECURITY_EXPANSION"
+                ],
+                "objective": "Diagnose and safely repair artifact permit 15-minute TTL versus hourly wakes and observed transport latency. Verify exact current contract, propose smallest bounded reversible A0/A1 change within approved security envelope, preserve fencing, idempotency and evidence; do not expand TTL or authority without contract proof.",
+                "occurrence_id": "SUP-20261008-PERMIT-TIMING",
+                "origin_agent_slug": "direction-supervisor",
+                "origin_run_id": "9d697ec9-6e0f-4869-9637-ea084994d17e",
+                "resource_scope": "foundry:supervisor:artifact-permits",
+                "success": "Demonstrate a real permit and correct artifact can be bound/consumed with terminal ACK inside permitted expiry; verify by readback and durable ledger; otherwise checkpoint precise blocker."
+              },
+              "title": "Repair artifact permit timing",
+              "version": 9
+            },
+            "task_id": "3e81addb-3ad2-48f2-8a24-4b19c91475ba"
+          }
+        },
+        "ok": true,
+        "operation": "begin_work",
+        "request_id": "foundry-supervisor-20261008T2055Z-begin"
+      },
+      "terminal": true
+    },
     "g2-public-outbox-scheduled-01": {
       "http_status": 200,
       "operation": "get_wake_bundle",
@@ -9510,6 +9581,6 @@
       "terminal": true
     }
   },
-  "updated_at": "2026-10-08T20:02:23.611358+00:00",
+  "updated_at": "2026-10-08T21:01:29.806213+00:00",
   "version": 1
 }
