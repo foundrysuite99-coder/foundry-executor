@@ -10623,6 +10623,73 @@
       },
       "terminal": true
     },
+    "foundry-supervisor-20261009T0651Z-begin": {
+      "http_status": 200,
+      "operation": "begin_work",
+      "processed_at": "2026-10-09T06:58:39.369740+00:00",
+      "response": {
+        "auth": {
+          "actor": "foundrysuite99-coder",
+          "audience": "foundry-control-plane",
+          "event_name": "schedule",
+          "job_workflow_ref": "foundrysuite99-coder/foundry-executor/.github/workflows/drive-outbox-worker.yml@e5e282d5eb71d07f57e8d2d8f6ddceb996cde16a",
+          "provider": "github",
+          "ref": "refs/heads/main",
+          "repository": "foundrysuite99-coder/foundry-executor"
+        },
+        "dispatch": {
+          "operation": "begin_work",
+          "replayed": false,
+          "request_id": "foundry-supervisor-20261009T0651Z-begin",
+          "result": {
+            "agent_slug": "direction-supervisor",
+            "claimed": true,
+            "effective_lease_seconds": 21600,
+            "lease_expires_at": "2026-10-09T12:58:39.225939+00:00",
+            "lease_generation": 9,
+            "run_id": "d877738b-d895-4e41-a7d7-107f6f9be06c",
+            "task": {
+              "authority_ceiling": 0,
+              "checkpoint": {
+                "diagnosis": "Document create/copy/edit and supervisor Outbox update previously blocked; other agent Outbox writes succeed. Root cause not verified.",
+                "evidence": "2026-10-09 03:58Z readback confirms prior supervisor checkpoint absent and mentor commands persisted; canonical wakes enabled.",
+                "next_step": "Obtain connector write error classification; repair only with authorized native actions, preserve run fencing and artifact provenance.",
+                "repair_verified": false,
+                "spend_eur": 0,
+                "status": "ARTIFACT_AUTHORING_DEGRADED_CONNECTOR_SAFETY_BLOCK"
+              },
+              "eligible_agent_slug": "direction-supervisor",
+              "origin_agent_slug": "direction-supervisor",
+              "resource_scope": "foundry:agent-task:3e81addb-3ad2-48f2-8a24-4b19c91475ba",
+              "task_class": "MAINTENANCE",
+              "task_id": "3e81addb-3ad2-48f2-8a24-4b19c91475ba",
+              "task_spec": {
+                "kind": "operational_incident",
+                "limits": [
+                  "A0_A1_ONLY",
+                  "NO_SPEND",
+                  "NO_PRODUCTION",
+                  "NO_SECURITY_EXPANSION"
+                ],
+                "objective": "Diagnose and safely repair artifact permit 15-minute TTL versus hourly wakes and observed transport latency. Verify exact current contract, propose smallest bounded reversible A0/A1 change within approved security envelope, preserve fencing, idempotency and evidence; do not expand TTL or authority without contract proof.",
+                "occurrence_id": "SUP-20261008-PERMIT-TIMING",
+                "origin_agent_slug": "direction-supervisor",
+                "origin_run_id": "9d697ec9-6e0f-4869-9637-ea084994d17e",
+                "resource_scope": "foundry:supervisor:artifact-permits",
+                "success": "Demonstrate a real permit and correct artifact can be bound/consumed with terminal ACK inside permitted expiry; verify by readback and durable ledger; otherwise checkpoint precise blocker."
+              },
+              "title": "Repair artifact permit timing",
+              "version": 15
+            },
+            "task_id": "3e81addb-3ad2-48f2-8a24-4b19c91475ba"
+          }
+        },
+        "ok": true,
+        "operation": "begin_work",
+        "request_id": "foundry-supervisor-20261009T0651Z-begin"
+      },
+      "terminal": true
+    },
     "g2-public-outbox-scheduled-01": {
       "http_status": 200,
       "operation": "get_wake_bundle",
@@ -10684,6 +10751,6 @@
       "terminal": true
     }
   },
-  "updated_at": "2026-10-09T06:32:56.606243+00:00",
+  "updated_at": "2026-10-09T06:58:39.369764+00:00",
   "version": 1
 }
