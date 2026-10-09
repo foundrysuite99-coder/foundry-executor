@@ -11187,6 +11187,93 @@
       },
       "terminal": true
     },
+    "foundry-supervisor-20261009T2257Z-begin": {
+      "http_status": 200,
+      "operation": "begin_work",
+      "processed_at": "2026-10-09T23:10:08.308969+00:00",
+      "response": {
+        "auth": {
+          "actor": "foundrysuite99-coder",
+          "audience": "foundry-control-plane",
+          "event_name": "schedule",
+          "job_workflow_ref": "foundrysuite99-coder/foundry-executor/.github/workflows/drive-outbox-worker.yml@e5e282d5eb71d07f57e8d2d8f6ddceb996cde16a",
+          "provider": "github",
+          "ref": "refs/heads/main",
+          "repository": "foundrysuite99-coder/foundry-executor"
+        },
+        "dispatch": {
+          "operation": "begin_work",
+          "replayed": false,
+          "request_id": "foundry-supervisor-20261009T2257Z-begin",
+          "result": {
+            "agent_slug": "direction-supervisor",
+            "claimed": true,
+            "effective_lease_seconds": 21600,
+            "lease_expires_at": "2026-10-10T05:10:08.133859+00:00",
+            "lease_generation": 12,
+            "run_id": "387c5d25-3cdc-4a63-9d03-43fe09f87bd8",
+            "task": {
+              "authority_ceiling": 0,
+              "checkpoint": {
+                "documents": [
+                  {
+                    "content": "STALE_P0_AUDIT",
+                    "created_at": "2026-10-08T11:54:04.849Z",
+                    "file_id": "1UwY8mA9MskNTuPtxRu-W2ZW8V6N2dSzdw2VbgtNSRrw",
+                    "folder": "EVIDENCE",
+                    "modified_at": "2026-10-08T11:54:04.849Z",
+                    "revision_count": 1
+                  },
+                  {
+                    "content": "STALE_P0_AUDIT",
+                    "created_at": "2026-10-07T22:34:21.937Z",
+                    "file_id": "1pntJf3YoXAyzlfXO9d7RqbSyob_KvcXniwBONacjtFY",
+                    "folder": "OUTPUTS",
+                    "modified_at": "2026-10-07T22:34:21.937Z",
+                    "revision_count": 1
+                  }
+                ],
+                "evidence_time_utc": "2026-10-09T14:56:00Z",
+                "finding": "Both artifacts had incorrect content from initial creation/first revision; no evidence of later overwrite. Exact copy/source mechanism unproven.",
+                "next_step": "Reconcile checkpoint ACK; release and finish. Investigate approved native authoring method and connector policy with no permission expansion. Do not issue permits on invalid artifacts.",
+                "operational_observation": "Outbox latest observed command at 2026-10-09T12:51:55Z; agent wakes continued but new durable commands not observed by 14:56Z. No inference of agent completion.",
+                "permit_risk": "15-minute TTL cannot reliably span separate hourly wakes; author and verify correct artifact first, then issue and consume with exact terminal ACK inside same valid window.",
+                "repair_verified": false,
+                "status": "IN_PROGRESS_ARTIFACT_AUTHORING_ROOT_CAUSE_NARROWED",
+                "write_blocker": "Native Google Docs edits repeatedly blocked by connector safety checks; no bypass attempted."
+              },
+              "eligible_agent_slug": "direction-supervisor",
+              "origin_agent_slug": "direction-supervisor",
+              "resource_scope": "foundry:agent-task:3e81addb-3ad2-48f2-8a24-4b19c91475ba",
+              "task_class": "MAINTENANCE",
+              "task_id": "3e81addb-3ad2-48f2-8a24-4b19c91475ba",
+              "task_spec": {
+                "kind": "operational_incident",
+                "limits": [
+                  "A0_A1_ONLY",
+                  "NO_SPEND",
+                  "NO_PRODUCTION",
+                  "NO_SECURITY_EXPANSION"
+                ],
+                "objective": "Diagnose and safely repair artifact permit 15-minute TTL versus hourly wakes and observed transport latency. Verify exact current contract, propose smallest bounded reversible A0/A1 change within approved security envelope, preserve fencing, idempotency and evidence; do not expand TTL or authority without contract proof.",
+                "occurrence_id": "SUP-20261008-PERMIT-TIMING",
+                "origin_agent_slug": "direction-supervisor",
+                "origin_run_id": "9d697ec9-6e0f-4869-9637-ea084994d17e",
+                "resource_scope": "foundry:supervisor:artifact-permits",
+                "success": "Demonstrate a real permit and correct artifact can be bound/consumed with terminal ACK inside permitted expiry; verify by readback and durable ledger; otherwise checkpoint precise blocker."
+              },
+              "title": "Repair artifact permit timing",
+              "version": 20
+            },
+            "task_id": "3e81addb-3ad2-48f2-8a24-4b19c91475ba"
+          }
+        },
+        "ok": true,
+        "operation": "begin_work",
+        "request_id": "foundry-supervisor-20261009T2257Z-begin"
+      },
+      "terminal": true
+    },
     "g2-public-outbox-scheduled-01": {
       "http_status": 200,
       "operation": "get_wake_bundle",
@@ -11248,6 +11335,6 @@
       "terminal": true
     }
   },
-  "updated_at": "2026-10-09T15:11:01.574911+00:00",
+  "updated_at": "2026-10-09T23:10:08.308990+00:00",
   "version": 1
 }
