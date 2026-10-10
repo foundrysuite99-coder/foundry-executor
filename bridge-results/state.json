@@ -11451,6 +11451,83 @@
       },
       "terminal": true
     },
+    "foundry-supervisor-20261010T0955Z-begin": {
+      "http_status": 200,
+      "operation": "begin_work",
+      "processed_at": "2026-10-10T10:00:46.080273+00:00",
+      "response": {
+        "auth": {
+          "actor": "foundrysuite99-coder",
+          "audience": "foundry-control-plane",
+          "event_name": "schedule",
+          "job_workflow_ref": "foundrysuite99-coder/foundry-executor/.github/workflows/drive-outbox-worker.yml@e5e282d5eb71d07f57e8d2d8f6ddceb996cde16a",
+          "provider": "github",
+          "ref": "refs/heads/main",
+          "repository": "foundrysuite99-coder/foundry-executor"
+        },
+        "dispatch": {
+          "operation": "begin_work",
+          "replayed": false,
+          "request_id": "foundry-supervisor-20261010T0955Z-begin",
+          "result": {
+            "agent_slug": "direction-supervisor",
+            "claimed": true,
+            "effective_lease_seconds": 21600,
+            "lease_expires_at": "2026-10-10T16:00:45.908696+00:00",
+            "lease_generation": 15,
+            "run_id": "65964ca5-08bf-489e-8c01-bab2a4fb3d5a",
+            "task": {
+              "authority_ceiling": 0,
+              "checkpoint": {
+                "evidence": {
+                  "artifact_authoring_state": "Existing OUTPUTS/EVIDENCE artifacts remain invalid per previous checkpoint; no valid artifact or permit was issued.",
+                  "begin_request_id": "foundry-supervisor-20261010T0552Z-begin",
+                  "lease_expires_at": "2026-10-10T12:06:10.437065Z",
+                  "lease_generation": 13,
+                  "observed_transport_delay_seconds": 830.695096,
+                  "outbox_created_at": "2026-10-10T05:52:20Z",
+                  "terminal_ack_at": "2026-10-10T06:06:10.695096Z",
+                  "workflow": "foundrysuite99-coder/foundry-executor/.github/workflows/drive-outbox-poller.yml and drive-outbox-worker.yml",
+                  "workflow_observation": "*/5 cron is best effort; worker processes max 5 pending commands per run, timeout 5 min, no latency guarantee; 15-minute artifact permit cannot safely span arbitrary hourly wakes or multiple sequential ACKs"
+                },
+                "evidence_time_utc": "2026-10-10T06:59:00Z",
+                "next_step": "Wait for exact checkpoint terminal ACK; then release_task and finish_run with generation fencing. Investigate authorized artifact authoring without connector security bypass. Preserve legacy task history.",
+                "repair_verified": false,
+                "smallest_safe_path": "Author and readback correct Foundry-owned artifact first via authorized method; issue and consume exact permit only with verified remaining TTL and terminal ACK, within same bounded run when feasible. If transport cannot satisfy deadline, fail closed and request explicit architecture review; do not extend TTL, bypass permit, or declare repaired.",
+                "status": "IN_PROGRESS_TRANSPORT_TTL_CONTRACT_RISK_VERIFIED"
+              },
+              "eligible_agent_slug": "direction-supervisor",
+              "origin_agent_slug": "direction-supervisor",
+              "resource_scope": "foundry:agent-task:3e81addb-3ad2-48f2-8a24-4b19c91475ba",
+              "task_class": "MAINTENANCE",
+              "task_id": "3e81addb-3ad2-48f2-8a24-4b19c91475ba",
+              "task_spec": {
+                "kind": "operational_incident",
+                "limits": [
+                  "A0_A1_ONLY",
+                  "NO_SPEND",
+                  "NO_PRODUCTION",
+                  "NO_SECURITY_EXPANSION"
+                ],
+                "objective": "Diagnose and safely repair artifact permit 15-minute TTL versus hourly wakes and observed transport latency. Verify exact current contract, propose smallest bounded reversible A0/A1 change within approved security envelope, preserve fencing, idempotency and evidence; do not expand TTL or authority without contract proof.",
+                "occurrence_id": "SUP-20261008-PERMIT-TIMING",
+                "origin_agent_slug": "direction-supervisor",
+                "origin_run_id": "9d697ec9-6e0f-4869-9637-ea084994d17e",
+                "resource_scope": "foundry:supervisor:artifact-permits",
+                "success": "Demonstrate a real permit and correct artifact can be bound/consumed with terminal ACK inside permitted expiry; verify by readback and durable ledger; otherwise checkpoint precise blocker."
+              },
+              "title": "Repair artifact permit timing",
+              "version": 24
+            },
+            "task_id": "3e81addb-3ad2-48f2-8a24-4b19c91475ba"
+          }
+        },
+        "ok": true,
+        "operation": "begin_work",
+        "request_id": "foundry-supervisor-20261010T0955Z-begin"
+      },
+      "terminal": true
+    },
     "g2-public-outbox-scheduled-01": {
       "http_status": 200,
       "operation": "get_wake_bundle",
@@ -11512,6 +11589,6 @@
       "terminal": true
     }
   },
-  "updated_at": "2026-10-10T08:54:51.809795+00:00",
+  "updated_at": "2026-10-10T10:00:46.080291+00:00",
   "version": 1
 }
