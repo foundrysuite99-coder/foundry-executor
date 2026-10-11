@@ -11894,6 +11894,18 @@
       },
       "terminal": true
     },
+    "foundry-supervisor-20261011T0353Z-wake-bundle": {
+      "http_status": 409,
+      "operation": "get_wake_bundle",
+      "processed_at": "2026-10-11T03:58:40.693340+00:00",
+      "response": {
+        "code": "P0001",
+        "error": "OPERATION_REJECTED",
+        "operation": "get_wake_bundle",
+        "request_id": "foundry-supervisor-20261011T0353Z-wake-bundle"
+      },
+      "terminal": true
+    },
     "g2-public-outbox-scheduled-01": {
       "http_status": 200,
       "operation": "get_wake_bundle",
@@ -11955,6 +11967,6 @@
       "terminal": true
     }
   },
-  "updated_at": "2026-10-11T03:20:45.655776+00:00",
+  "updated_at": "2026-10-11T03:58:40.693359+00:00",
   "version": 1
 }
