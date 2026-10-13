@@ -12788,6 +12788,18 @@
       },
       "terminal": true
     },
+    "foundry-supervisor-20261013T0455Z-migration-task-gen18": {
+      "http_status": 409,
+      "operation": "create_peer_task",
+      "processed_at": "2026-10-13T05:13:57.480046+00:00",
+      "response": {
+        "code": "P0001",
+        "error": "OPERATION_REJECTED",
+        "operation": "create_peer_task",
+        "request_id": "foundry-supervisor-20261013T0455Z-migration-task-gen18"
+      },
+      "terminal": true
+    },
     "g2-public-outbox-scheduled-01": {
       "http_status": 200,
       "operation": "get_wake_bundle",
@@ -12849,6 +12861,6 @@
       "terminal": true
     }
   },
-  "updated_at": "2026-10-13T02:03:58.102433+00:00",
+  "updated_at": "2026-10-13T05:13:57.480095+00:00",
   "version": 1
 }
