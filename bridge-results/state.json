@@ -13034,6 +13034,94 @@
       },
       "terminal": true
     },
+    "foundry-supervisor-20261013T1851Z-registry-wake-bundle": {
+      "http_status": 200,
+      "operation": "get_wake_bundle",
+      "processed_at": "2026-10-13T19:04:50.711412+00:00",
+      "response": {
+        "auth": {
+          "actor": "foundrysuite99-coder",
+          "audience": "foundry-control-plane",
+          "event_name": "schedule",
+          "job_workflow_ref": "foundrysuite99-coder/foundry-executor/.github/workflows/drive-outbox-worker.yml@e5e282d5eb71d07f57e8d2d8f6ddceb996cde16a",
+          "provider": "github",
+          "ref": "refs/heads/main",
+          "repository": "foundrysuite99-coder/foundry-executor"
+        },
+        "dispatch": {
+          "operation": "get_wake_bundle",
+          "replayed": false,
+          "request_id": "foundry-supervisor-20261013T1851Z-registry-wake-bundle",
+          "result": {
+            "agent_active": true,
+            "agent_slug": "direction-supervisor",
+            "eligible": [
+              {
+                "authority_ceiling": 0,
+                "base_priority": 900,
+                "checkpoint": {},
+                "due_at": null,
+                "eligibility_mode": "ALWAYS_ELIGIBLE",
+                "eligible_agent_slug": "direction-supervisor",
+                "occurrence_id": "AGENT-6af44775e9c443be85ad655f4dffc4db",
+                "origin_agent_slug": "direction-supervisor",
+                "resource_scope": "foundry:agent-task:6af44775-e9c4-43be-85ad-655f4dffc4db",
+                "state": "RUNNING",
+                "task_class": "MAINTENANCE",
+                "task_id": "6af44775-e9c4-43be-85ad-655f4dffc4db",
+                "task_spec": {
+                  "kind": "operational_incident",
+                  "limits": [
+                    "A0_A1_ONLY",
+                    "NO_SPEND",
+                    "NO_PRODUCTION",
+                    "NO_SECURITY_EXPANSION",
+                    "NO_DIRECT_SUPABASE_MUTATION"
+                  ],
+                  "objective": "Reconcile legacy agents and tasks with canonical Foundry Agent Economy Lab v2.0. Verify current registry, tasks, leases and capabilities. Propose only approved reversible semantic changes and checkpoint precise blockers; do not modify registry without explicit authority.",
+                  "occurrence_id": "SUP-20261013-V2-MIGRATION",
+                  "origin_agent_slug": "direction-supervisor",
+                  "origin_run_id": "b550295b-ffa8-49c3-b9f0-025e79fb5212",
+                  "resource_scope": "foundry:supervisor:caretaker",
+                  "success": "Durable evidence of operational mismatch and a validated authorized migration step or precise blocker checkpoint."
+                },
+                "title": "Reconcile Foundry v2.0 operational migration",
+                "version": 2
+              },
+              {
+                "authority_ceiling": 1,
+                "base_priority": 100,
+                "checkpoint": {
+                  "repair_task_id": "3e81addb-3ad2-48f2-8a24-4b19c91475ba",
+                  "status": "REPAIR_TASK_READY"
+                },
+                "due_at": null,
+                "eligibility_mode": "ALWAYS_ELIGIBLE",
+                "eligible_agent_slug": "direction-supervisor",
+                "occurrence_id": "SUP-PERMANENT-CARETAKER",
+                "origin_agent_slug": "direction-supervisor",
+                "resource_scope": "foundry:supervisor:caretaker",
+                "state": "READY",
+                "task_class": "CARETAKER",
+                "task_id": "0bdfa4a6-ead3-418c-83a6-a85ad664c143",
+                "task_spec": {
+                  "kind": "supervisor_caretaker",
+                  "objective": "Reconcile Foundry operational health. If a new bounded operational issue is detected, create a direction-supervisor MAINTENANCE/CARETAKER task for it using the authorized self-task mechanism. If no issue exists, no-op. Never complete this permanent caretaker; checkpoint/release it after the bounded wake."
+                },
+                "title": "Supervisor reconcile and triage",
+                "version": 30
+              }
+            ],
+            "observed_at": "2026-10-13T19:04:50.506174+00:00",
+            "project": "foundry"
+          }
+        },
+        "ok": true,
+        "operation": "get_wake_bundle",
+        "request_id": "foundry-supervisor-20261013T1851Z-registry-wake-bundle"
+      },
+      "terminal": true
+    },
     "g2-public-outbox-scheduled-01": {
       "http_status": 200,
       "operation": "get_wake_bundle",
@@ -13095,6 +13183,6 @@
       "terminal": true
     }
   },
-  "updated_at": "2026-10-13T12:07:03.192881+00:00",
+  "updated_at": "2026-10-13T19:04:50.711436+00:00",
   "version": 1
 }
