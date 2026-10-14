@@ -13324,6 +13324,18 @@
       },
       "terminal": true
     },
+    "foundry-supervisor-20261014T0152Z-checkpoint-legacy-venture-gen2": {
+      "http_status": 409,
+      "operation": "checkpoint_task",
+      "processed_at": "2026-10-14T02:11:42.796152+00:00",
+      "response": {
+        "code": "P0001",
+        "error": "OPERATION_REJECTED",
+        "operation": "checkpoint_task",
+        "request_id": "foundry-supervisor-20261014T0152Z-checkpoint-legacy-venture-gen2"
+      },
+      "terminal": true
+    },
     "g2-public-outbox-scheduled-01": {
       "http_status": 200,
       "operation": "get_wake_bundle",
@@ -13385,6 +13397,6 @@
       "terminal": true
     }
   },
-  "updated_at": "2026-10-14T01:15:48.261162+00:00",
+  "updated_at": "2026-10-14T02:11:42.796175+00:00",
   "version": 1
 }
