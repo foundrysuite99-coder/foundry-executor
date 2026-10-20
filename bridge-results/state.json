@@ -19002,6 +19002,58 @@
       },
       "terminal": true
     },
+    "foundry-supervisor-20261020T0354Z-begin-caretaker": {
+      "http_status": 200,
+      "operation": "begin_work",
+      "processed_at": "2026-10-20T04:08:39.857402+00:00",
+      "response": {
+        "auth": {
+          "actor": "foundrysuite99-coder",
+          "audience": "foundry-control-plane",
+          "event_name": "schedule",
+          "job_workflow_ref": "foundrysuite99-coder/foundry-executor/.github/workflows/drive-outbox-worker.yml@e5e282d5eb71d07f57e8d2d8f6ddceb996cde16a",
+          "provider": "github",
+          "ref": "refs/heads/main",
+          "repository": "foundrysuite99-coder/foundry-executor"
+        },
+        "dispatch": {
+          "operation": "begin_work",
+          "replayed": false,
+          "request_id": "foundry-supervisor-20261020T0354Z-begin-caretaker",
+          "result": {
+            "agent_slug": "direction-supervisor",
+            "claimed": true,
+            "effective_lease_seconds": 21600,
+            "lease_expires_at": "2026-10-20T10:08:39.660581+00:00",
+            "lease_generation": 62,
+            "run_id": "b41a7337-8a73-4d6d-bf91-57403922665c",
+            "task": {
+              "authority_ceiling": 1,
+              "checkpoint": {
+                "repair_task_id": "3e81addb-3ad2-48f2-8a24-4b19c91475ba",
+                "status": "REPAIR_TASK_READY"
+              },
+              "eligible_agent_slug": "direction-supervisor",
+              "origin_agent_slug": "direction-supervisor",
+              "resource_scope": "foundry:supervisor:caretaker",
+              "task_class": "CARETAKER",
+              "task_id": "0bdfa4a6-ead3-418c-83a6-a85ad664c143",
+              "task_spec": {
+                "kind": "supervisor_caretaker",
+                "objective": "Reconcile Foundry operational health. If a new bounded operational issue is detected, create a direction-supervisor MAINTENANCE/CARETAKER task for it using the authorized self-task mechanism. If no issue exists, no-op. Never complete this permanent caretaker; checkpoint/release it after the bounded wake."
+              },
+              "title": "Supervisor reconcile and triage",
+              "version": 71
+            },
+            "task_id": "0bdfa4a6-ead3-418c-83a6-a85ad664c143"
+          }
+        },
+        "ok": true,
+        "operation": "begin_work",
+        "request_id": "foundry-supervisor-20261020T0354Z-begin-caretaker"
+      },
+      "terminal": true
+    },
     "g2-public-outbox-scheduled-01": {
       "http_status": 200,
       "operation": "get_wake_bundle",
@@ -19063,6 +19115,6 @@
       "terminal": true
     }
   },
-  "updated_at": "2026-10-20T03:00:37.243518+00:00",
+  "updated_at": "2026-10-20T04:08:39.857424+00:00",
   "version": 1
 }
