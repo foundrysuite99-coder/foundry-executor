@@ -24852,6 +24852,36 @@
       },
       "terminal": true
     },
+    "foundry-supervisor-20261026T0847Z-finish-released-caretaker-gen106-run22": {
+      "http_status": 200,
+      "operation": "finish_run",
+      "processed_at": "2026-10-26T09:04:11.912364+00:00",
+      "response": {
+        "auth": {
+          "actor": "foundrysuite99-coder",
+          "audience": "foundry-control-plane",
+          "event_name": "schedule",
+          "job_workflow_ref": "foundrysuite99-coder/foundry-executor/.github/workflows/drive-outbox-worker.yml@e5e282d5eb71d07f57e8d2d8f6ddceb996cde16a",
+          "provider": "github",
+          "ref": "refs/heads/main",
+          "repository": "foundrysuite99-coder/foundry-executor"
+        },
+        "dispatch": {
+          "operation": "finish_run",
+          "replayed": false,
+          "request_id": "foundry-supervisor-20261026T0847Z-finish-released-caretaker-gen106-run22",
+          "result": {
+            "ok": true,
+            "run_id": "f85dc140-071e-4958-9b88-3cc2a945d502",
+            "state": "COMPLETE"
+          }
+        },
+        "ok": true,
+        "operation": "finish_run",
+        "request_id": "foundry-supervisor-20261026T0847Z-finish-released-caretaker-gen106-run22"
+      },
+      "terminal": true
+    },
     "g2-public-outbox-scheduled-01": {
       "http_status": 200,
       "operation": "get_wake_bundle",
@@ -24913,6 +24943,6 @@
       "terminal": true
     }
   },
-  "updated_at": "2026-10-26T07:24:00.476260+00:00",
+  "updated_at": "2026-10-26T09:04:11.912384+00:00",
   "version": 1
 }
